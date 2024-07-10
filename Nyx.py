@@ -1,16 +1,18 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from sched import scheduler
+from apscheduler.triggers.cron import CronTrigger
 import discord
 from discord.ext.commands import Bot
 from discord.ui import View, Button
 from discord.ext import commands
+from discord import app_commands
 import io
 import html
 from collections import defaultdict
 from datetime import datetime, timedelta
-from constante import server, rules_1, rules_2, invite, donate, embed_botton
+from constante import server, rules_1, rules_2, invite, donate, embed_botton, porta_ip
 
-TOKEN = 'SEU_TOKEN_AQUI'
+TOKEN = 'YOUR_TOKEN_HERE'
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -26,26 +28,6 @@ bot = commands.Bot(command_prefix='n!', intents=intents)
 async def on_ready():
     bot.add_view(TicketView())  # Adiciona a view persistent ao iniciar
     print(f'Bot conectado como {bot.user.name}')
-
-@bot.command()
-async def ticket(ctx):
-    guild = ctx.guild
-
-    channel = discord.utils.get(guild.text_channels, name=f'ticket-{ctx.author.name}')
-    if not channel:
-        admin_role_id = 1241104535905243177  # Replace with the actual ID
-        admin_role = guild.get_role(admin_role_id)
-
-        overwrites = {
-            guild.default_role: discord.PermissionOverwrite(read_messages=False),
-            ctx.author: discord.PermissionOverwrite(read_messages=True, send_messages=True),
-        }
-        
-        # Criação do canal de texto diretamente na guild
-        channel = await guild.create_text_channel(f'ticket-{ctx.author.name}', overwrites=overwrites)
-        embed = discord.Embed(title="Ticket Aberto", description=f"Olá {ctx.author.mention}, 📩 Seu ticket foi aberto!", color=0xDC143C)
-        
-        await channel.send(embed=embed, view=CloseButtonView(ctx.author))
 
 @bot.command()
 async def ticket_button(ctx):
@@ -164,42 +146,61 @@ async def salvar_ticket(ctx, ticket_channel: discord.TextChannel):
     else:
         await ctx.send("Este comando só pode ser usado em canais de tickets.")
 #*------------------------------------------------------------------------------------------------------------------------------*
-#embeds
+# Embeds
 @bot.command()
-async def info_server(ctx):
-
-    embed = discord.Embed(title="", description=server, color=0xDC143C)  
-    
-    embed.set_footer(text=f"")
-
-    await ctx.send(embed=embed)
-
-@bot.command()
-async def regras_1(ctx):
-
-    embed = discord.Embed(title="", description=rules_1, color=0xDC143C)  
-    
-    embed.set_footer(text=f"")
-
-    await ctx.send(embed=embed)
+async def info_server(ctx, channel_id: int):
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(title="", description=server, color=0xDC143C)
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send(f"Mensagem de informações do servidor enviada para {channel.mention}")
+    else:
+        await ctx.send(f"Canal com ID {channel_id} não encontrado.")
 
 @bot.command()
-async def regras_2(ctx):
-
-    embed = discord.Embed(title="", description=rules_2, color=0xDC143C)  
- 
-    embed.set_footer(text=f"")
-
-    await ctx.send(embed=embed)
+async def regras_1(ctx, channel_id: int):
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(title="", description=rules_1, color=0xDC143C)
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send(f"Mensagem de regras (parte 1) enviada para {channel.mention}")
+    else:
+        await ctx.send(f"Canal com ID {channel_id} não encontrado.")
 
 @bot.command()
-async def convite(ctx):
+async def regras_2(ctx, channel_id: int):
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(title="", description=rules_2, color=0xDC143C)
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send(f"Mensagem de regras (parte 2) enviada para {channel.mention}")
+    else:
+        await ctx.send(f"Canal com ID {channel_id} não encontrado.")
 
-    embed = discord.Embed(title="", description=invite, color=0xDC143C)  
- 
-    embed.set_footer(text=f"")
+@bot.command()
+async def convite(ctx, channel_id: int):
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(title="", description=invite, color=0xDC143C)
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send(f"Convite enviado para {channel.mention}")
+    else:
+        await ctx.send(f"Canal com ID {channel_id} não encontrado.")
 
-    await ctx.send(embed=embed)
+@bot.command()
+async def ip_porta(ctx, channel_id: int):
+    channel = bot.get_channel(channel_id)
+    if channel:
+        embed = discord.Embed(title="", description=porta_ip, color=0xDC143C)
+        embed.set_footer(text="")
+        await channel.send(embed=embed)
+        await ctx.send(f"Ip e Porta enviado para {channel.mention}")
+    else:
+        await ctx.send(f"Canal com ID {channel_id} não encontrado.")        
 #*------------------------------------------------------------------------------------------------------------------------------*
 #doações
 @bot.command()
@@ -342,6 +343,8 @@ async def restart(channel_id: int):
             color=0xDC143C
         )
         await channel.send(embed=embed)
+    else:
+        print(f"Channel with ID {channel_id} not found.")        
 
 # Função para enviar mensagem com embed de claim carros
 async def claim_carros(channel_id: int):
@@ -355,6 +358,8 @@ async def claim_carros(channel_id: int):
             color=0xDC143C
         )
         await channel.send(embed=embed)
+    else:
+        print(f"Channel with ID {channel_id} not found.")        
 
 # Função para enviar mensagem com embed de PVP
 async def pvp(channel_id: int):
@@ -363,48 +368,23 @@ async def pvp(channel_id: int):
         embed = discord.Embed(
             title="",
             description="Este servidor é PVP. Existe o risco constante de combate entre jogadores. Esteja preparado para confrontos a qualquer momento."
-                        " Lembre-se: **Posso matar ou posso morrer**. Divirta-se e jogue com estratégia!\n\n"
+                        "Divirta-se e jogue com estratégia!\n\n"
                         "**E lembre-se A LUTA COMEÇA E ACABA DENTRO DO JOGO.**",
             color=0xDC143C
         )
         await channel.send(embed=embed)
+    else:
+        print(f"Channel with ID {channel_id} not found.")
 
 # Função para agendar todas as mensagens
 def schedule_all_messages():
-    now = datetime.now()
-
-    # Horários para mensagens de restart
-    restart_times = [
-        (6, 10),    # 06h10
-        (12, 10),   # 12h10
-        (18, 10),   # 18h10
-        (0, 10)     # 00h10
-    ]
-    for hour, minute in restart_times:
-        run_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if run_time < now:
-            run_time += timedelta(days=1)
-        scheduler.add_job(restart, 'date', run_date=run_time, args=[1253194851709882438])
-
-    # Horários para mensagens de claim carros
-    claim_carros_times = [
-        (10, 0),   # 10h00
-        (22, 0)    # 22h00
-    ]
-    for hour, minute in claim_carros_times:
-        run_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if run_time < now:
-            run_time += timedelta(days=1)
-        scheduler.add_job(claim_carros, 'date', run_date=run_time, args=[1253194851709882438])
-
-    # Horário para mensagem de PVP
-    pvp_times = [
-        (20, 30)    # 20h30
-    ]
-    for hour, minute in pvp_times:
-        run_time = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-        if run_time < now:
-            run_time += timedelta(days=1)
-        scheduler.add_job(pvp, 'date', run_date=run_time, args=[1253194851709882438])
+    # Mensagens de restart a cada 6 horas
+    scheduler.add_job(restart, CronTrigger(hour='6,12,18,0', minute=0), args=[1253194851709882438])
+    
+    # Mensagens de claim carros duas vezes por dia
+    scheduler.add_job(claim_carros, CronTrigger(hour='10,22', minute=0), args=[1253194851709882438])
+    
+    # Mensagem de PVP uma vez por dia
+    scheduler.add_job(pvp, CronTrigger(hour=20, minute=30), args=[1253194851709882438])        
         
 bot.run(TOKEN)

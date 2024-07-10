@@ -25,14 +25,11 @@ duvidas = "<#1252336740404957327>"
 # Menção de usuarios
 princesa = "<@377121416333754379>"
 freitinhas = "<@733722652614852649>"
+ponter = "<@782722630125879376>"
 
 server = (
-        f"# 𝐈𝐧𝐟𝐨-𝐒𝐞𝐫𝐯𝐞𝐫 {emoji4} #\n\n"
-        f"**O servidor é público, para acessar use essas informações {emoji1}**\n"
-        f"**IP: 181.215.236.42 📡**\n"
-        "**PORTA: 16066 🔑**\n\n"
         f"**{emoji2} O PVP está ligado o tempo todo, por isso cuidado para não machucar o amiguinho sem querer, danos por atropelamento também.**\n\n"
-        f"{emoji2} Olhe todos os nossos mods [aqui](https://steamcommunity.com/sharedfiles/filedetails/?id=3250138493)\n\n"
+        f"{emoji2} **Olhe todos os nossos mods [aqui](https://steamcommunity.com/sharedfiles/filedetails/?id=3250138493)**\n\n"
         f"{emoji2} **Todos os dias fazemos restart para manutenção do servidor.\n**"
         "● As 06h10 ; 12h10 ; 18h10 ; 00h10\n"
         "➥ Clique [aqui](https://discord.com/channels/1241052393165160508/1252694520617898014) para acompanhar o status do server\n\n"
@@ -84,7 +81,7 @@ rules_1 = (
         f"**de project zomboid  {emoji4}**\n\n"
         "## **➥ Da administração** ##\n"
         "● 1.1. Seja respeitoso com a equipe de administração. Qualquer forma de desrespeito ou agressão pode resultar em advertências ou, em casos graves, banimento. Nosso objetivo é manter um ambiente harmonioso e acolhedor para todos os membros da comunidade.\n"
-        f"● 1.2. O servidor é hosteado por uma empresa terceira, e nós administramos. ➥ {princesa} e {freitinhas}.\n"
+        f"● 1.2. O servidor é hosteado por uma empresa terceira, e nós administramos. ➥ {princesa}, {ponter} e {freitinhas}.\n"
         f"● 1.3. **Evite incomodar os administradores em mensagens privadas e também evite mencioná-los nas mensagens. Se precisar entrar em contato com um administrador, use o canal {ticket}, pois é a maneira mais rápida de conseguir assistência.**\n"
         "● 1.4. Somos uma equipe pequena lidando com muitas responsabilidades para garantir uma experiência agradável a todos no jogo. **Pedimos que tenha paciência, pois também temos obrigações fora do jogo.**\n"
         "● 1.5. Evite repetir comentários sobre lag ou outras instabilidades que possam ocorrer no servidor. A equipe de administração está ciente desses problemas e, sempre que possível, iremos investigá-los.\n"
@@ -124,7 +121,7 @@ rules_2 = (
         "● 3.8.2. **Após um combate, o saque de corpos de jogadores mortos é permitido. No entanto, é estritamente proibido destruir, esconder, mover ou de qualquer outra forma manipular itens do jogador morto que impeça que ele possa recuperar o que sobrou no corpo. Assim o player que morreu tem chance de recuperar o que sobrou no corpo.**\n"
         "● 3.8.3. **Após a luta, qualquer forma de 'trash talk', provocação ou comportamento tóxico dentro do discord é passível de advertência, ou dependo do caso, banimento. A LUTA COMEÇA E ACABA DENTRO DO JOGO.**\n"
         "● 3.8.4. O uso de bugs, glitches ou qualquer tipo de exploit do jogo para obter vantagem em combate PVP é estritamente proibido. Qualquer jogador pego utilizando tais métodos será banido permanentemente.\n"
-        "● 3.8.5. **É proibido o uso do combatlog (deslogar para não morrer) em combates PVP, se você caiu tire um print e informe a moderação através de um ticket, caso contrário será penalizado.\n"
+        "● 3.8.5. **É proibido o uso do combatlog (deslogar para não morrer) em combates PVP, se você caiu tire um print e informe a moderação através de um ticket, caso contrário será penalizado.**\n"
         "● 3.8.6. É estritamente proibido entrar em uma facção com a intenção de prejudicar seus membros, como matar todos ou roubar itens. Isso inclui qualquer ação que possa ser interpretada como traição ou sabotagem interna.\n"
 
 )
@@ -193,9 +190,15 @@ donate = (f"# Apoie o server {emoji6} #\n"
           "🚗 1 Carro 100% da sua escolha com blindagem ➥ R$15,00\n"
           "🧬 2 Vacinas da cura ou cura 100% do personagem ➥ R$5,00\n"
           f"{emoji7} Restaurar as habilidades da última morte ➥ R$10,00\n\n"
-          f"**➥ Todos os doadores, independentemente do valor, receberão o cargo de apoiador como forma de reconhecimento. {emoji6}**"
+          f"**➥ Todos os doadores, independentemente do valor, receberão o cargo de apoiador como forma de reconhecimento. {emoji6}**\n"
+          "**➥ A doação não garante nenhum tratamento VIP, todos serão tratados de forma igualitária.**"
 )  
 embed_botton = ("**Qualquer outro valor é bem vindo e pensaremos em algum brinde a altura.**\n\n"
                 f"**Saiba que sua presença é muito apreciada, independentemente de qualquer doação. Obrigado pelo apoio! {emoji6}**"
 )
-
+porta_ip = (f"# 𝗜𝗻𝗳𝗼 𝗦𝗲𝗿𝘃𝗲𝗿 {emoji4} #\n\n"
+            f"### **O servidor é público, para acessar use essas informações {emoji1}** ###\n\n"
+            f"**IP: 181.215.236.42 📡**\n"
+            "**PORTA: 16066 🔑**"
+    
+)
