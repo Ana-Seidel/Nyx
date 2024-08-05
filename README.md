@@ -30,6 +30,13 @@
     </a>
 </div>
 
+<br>
+
+<p align="center">
+    <img src="https://img.shields.io/badge/Status-Concluído-%231AFFD5?style=for-the-badge&logoColor=white&logo=github" alt="Status">
+</p>
+
+
 <p align="center">
     ©2024 by Ana Luiza Seidel
 </p>
