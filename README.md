@@ -22,7 +22,7 @@
 ⤷ Mensagens Programadas: Envia avisos automáticos e lembretes em horários agendados.
 
 <div style="text-align:center;">
-    <a href="https://www.linkedin.com/in/ana-luiza-seidel-95a2a61b8/">
+    <a href="https://www.linkedin.com/in/analuizacirilo/">
         <img src="https://img.shields.io/badge/-LinkedIn-DC143C?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn">
     </a>
     <a href="mailto:anaafsw1@gmail.com">
